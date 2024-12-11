@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <a href="sty.css" rel="stylesheet"></a>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Photo</title>
+    <style>
+        .upload-container {
+            text-align: center;
+            margin-top: 50px;
+        }
+        #photo-upload {
+            display: none;
+        }
+        #upload-label {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        #preview-image {
+            max-width: 300px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="upload-container">
+        <label for="photo-upload" id="upload-label">Choose Photo</label>
+        <input type="file" id="photo-upload" accept="image/*" onchange="previewPhoto(event)">
+        <div id="preview-container">
+            <img id="preview-image" src="#" alt="Preview Image">
+        </div>
+    </div>
+
+    <script>
+        function previewPhoto(event) {
+            const file = event.target.files[0];
+            const previewImage = document.getElementById('preview-image');
+
+            const reader = new FileReader();
+            reader.onload = function() {
+                previewImage.src = reader.result;
+            }
+            if (file) {
+                reader.readAsDataURL(file);
+            } else {
+                previewImage.src = "";
+            }
+        }
+        
+    </script>
+    <div class="description">
+    <label  type = "radio" for="Add a descripion..." ></label>
+</div>
+</body>

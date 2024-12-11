@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vendor Search</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+  }
+
+  #container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  #searchInput {
+    padding: 10px;
+    width: 100%;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    background-color: #f5f5f5;
+  }
+
+  #searchResults {
+    list-style: none;
+    padding: 0;
+  }
+
+  #searchResults li {
+    cursor: pointer;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.3s ease;
+  }
+
+  #searchResults li:hover {
+    background-color: #fafafa;
+  }
+
+  #details {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-top: 20px;
+    background-color: #f5f5f5;
+    position: relative;
+  }
+
+  .rating {
+    unicode-bidi: bidi-override;
+    direction: rtl;
+    display: inline-block;
+  }
+
+  .rating > span {
+    display: inline-block;
+    position: relative;
+    width: 1.1em;
+    font-size: 20px;
+  }
+
+  .rating > span:hover:before,
+  .rating > span:hover ~ span:before {
+    content: "\2605";
+    position: absolute;
+    color: gold;
+  }
+
+  #orderButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+
+  #orderDetails {
+    display: none;
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f5f5f5;
+  }
+</style>
+</head>
+<body>
+
+<div id="container">
+  <input type="text" id="searchInput" onkeyup="searchVendors()" placeholder="Search for goods...">
+  <ul id="searchResults"></ul>
+  <div id="details"></div>
+  <div id="orderDetails"></div>
+</div>
+
+<script>
+  const vendors = [
+    { name: "Appa Rao", address: "23-749, Luthiana", contact: "9837146520", goods: [
+      { name: "Torch Lights", price: 100, quantity: 70, ratings: 4.8},
+      { name: "Memory Cards", price: 250, quantity: 55, ratings:4.0 },
+      { name: "CD Disks", price: 75, quantity: 60, ratings:3.0 }
+    ]},
+    { name: "Kumar", address: "23-756, Noida", contact: "9829136520", goods: [
+      { name: "Torch Lights", price: 110, quantity: 50, ratings:4.5 },
+      { name: "Memory Cards", price: 200, quantity: 30, ratings:5.0 },
+      { name: "CD Disks", price: 70, quantity: 50, ratings:3.0 }
+    ]},
+    { name: "Sharma", address: "24-987, Kargil", contact: "7839116520", goods: [
+      { name: "Torch Lights", price: 130, quantity: 50, ratings:4.0 },
+      { name: "Memory Cards", price: 220, quantity: 30, ratings:4.3 },
+      { name: "CD Disks", price: 80, quantity: 50, ratings:3.2 }
+    ]}
+  ];
+
+  function searchVendors() {
+    const searchTerm = document.getElementById("searchInput").value.toLowerCase();
+    const searchResults = document.getElementById("searchResults");
+    searchResults.innerHTML = '';
+    if (searchTerm.length > 0) {
+      vendors.forEach(vendor => {
+        vendor.goods.forEach(good => {
+          if (good.name.toLowerCase().includes(searchTerm)) {
+            const li = document.createElement("li");
+            li.innerHTML = `
+              <strong>${good.name}</strong> - ${vendor.name}<br>
+              <span style="color: #888;">${vendor.address}</span>
+            `;
+            li.addEventListener("click", () => showDetails(good, vendor));
+            searchResults.appendChild(li);
+          }
+        });
+      });
+      searchResults.style.display = "block";
+    } else {
+      searchResults.style.display = "none";
+    }
+  }
+
+  function showDetails(good, vendor) {
+    const detailsDiv = document.getElementById("details");
+    const stars = '<span style="color:gold">&#9733;</span>'.repeat(good.ratings);
+    detailsDiv.innerHTML = `
+      <h2>Details</h2>
+      <p><strong>Good Name:</strong> ${good.name}</p>
+      <p><strong>Vendor Name:</strong> ${vendor.name}</p>
+      <p><strong>Vendor Address:</strong> ${vendor.address}</p>
+      <p><strong>Vendor Contact:</strong> ${vendor.contact}</p>
+      <p><strong>Quantity:</strong> ${good.quantity}</p>
+      <p><strong>Quantity:</strong> ${good.quantity}</p>
+      <p><strong>Price:</strong> ${good.price} rupees per unit</p>
+      <p><strong>Ratings:</strong> <div class="rating">${stars}</div></p>
+      <button id="orderButton" onclick="placeOrder('${good.name}', '${vendor.name}', ${good.price})">Request Order</button>
+    `;
+    detailsDiv.style.display = "block";
+  }
+
+  function placeOrder(productName, vendorName, price) {
+    const quantity = prompt("Enter quantity:");
+    if (quantity !== null && quantity !== "") {
+      const totalPrice = price * parseInt(quantity);
+      const orderDetails = document.getElementById("orderDetails");
+      orderDetails.innerHTML = `
+        <h2>Order Receipt</h2>
+        <p><strong>Product:</strong> ${productName}</p>
+        <p><strong>Vendor:</strong> ${vendorName}</p>
+        <p><strong>Quantity:</strong> ${quantity}</p>
+        <p><strong>Total Price:</strong> ${totalPrice} rupees</p>
+      `;
+      orderDetails.style.display = "block";
+    }
+  }
+</script>
+
+</body>
+</html>

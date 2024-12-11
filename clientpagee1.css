@@ -1,0 +1,20 @@
+/* Style for list items */
+.item {
+    cursor: pointer;
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s;
+}
+
+/* Hover effect */
+.item:hover {
+    background-color: #e0e0e0;
+}
+
+/* Active effect */
+.item.active {
+    background-color: #c7ecee; /* Change to desired active color */
+}

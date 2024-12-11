@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .img{
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <!-- ====== Forms Section Start -->
+    <section class="bg-[#F4F7FF] py-20 lg:py-[120px]">
+        <div class="container">
+            <div class="flex flex-wrap -mx-4">
+                <!-- Vendor Login Form -->
+                <div class="w-full lg:w-1/2 px-4 mb-8 lg:mb-0">
+                    <div class="max-w-[525px] mx-auto text-center bg-white rounded-lg relative overflow-hidden py-16 px-10 sm:px-12 md:px-[60px]">
+                        <div class="mb-10 md:mb-16 text-center">
+                            <a href="javascript:void(0)" class="inline-block max-w-[160px] mx-auto">
+                                <img src="./user_1177568.png" class="img">
+                            </a>
+                        </div>
+                        <form id="vendorLoginForm">
+                            <div class="mb-6">
+                                <input type="text" id="vendorEmail" placeholder="Vendor Email" class="w-full rounded-md border bordder-[#E9EDF4] py-3 px-5 bg-[#FCFDFE] text-base text-body-color placeholder-[#ACB6BE] outline-none focus-visible:shadow-none focus:border-primary" />
+                            </div>
+                            <div class="mb-6">
+                                <input type="password" id="vendorPassword" placeholder="Password" class="w-full rounded-md border bordder-[#E9EDF4] py-3 px-5 bg-[#FCFDFE] text-base text-body-color placeholder-[#ACB6BE] outline-none focus-visible:shadow-none focus:border-primary" />
+                            </div>
+                            <div class="mb-4">
+                                <input type="submit" value="Vendor Sign In" class="w-full rounded-md border bordder-primary py-3 px-5 bg-primary text-base text-black font-bold cursor-pointer hover:bg-opacity-90 transition" />
+                            </div>
+                            <p class="text-base text-[#adadad]">Don't have an account? <a href="#" class="text-primary underline">Create one below</a>.</p>
+                        </form>
+                        <button class="bg-blue-500 text-white px-4 py-2 rounded-md mt-4" onclick="window.location.href='registrationform.html'">Vendor Registration</button>
+                    </div>
+                </div>
+                <!-- Client Login Form -->
+                <div class="w-full lg:w-1/2 px-4">
+                    <div class="max-w-[525px] mx-auto text-center bg-white rounded-lg relative overflow-hidden py-16 px-10 sm:px-12 md:px-[60px]">
+                        <div class="mb-10 md:mb-16 text-center">
+                            <a href="javascript:void(0)" class="inline-block max-w-[160px] mx-auto">
+                                <img src="./user_1177568.png" class="img">
+                            </a>
+                        </div>
+                        <form id="clientLoginForm">
+                            <div class="mb-6">
+                                <input type="text" id="clientEmail" placeholder="Client Email" class="w-full rounded-md border bordder-[#E9EDF4] py-3 px-5 bg-[#FCFDFE] text-base text-body-color placeholder-[#ACB6BE] outline-none focus-visible:shadow-none focus:border-primary" />
+                            </div>
+                            <div class="mb-6">
+                                <input type="password" id="clientPassword" placeholder="Password" class="w-full rounded-md border bordder-[#E9EDF4] py-3 px-5 bg-[#FCFDFE] text-base text-body-color placeholder-[#ACB6BE] outline-none focus-visible:shadow-none focus:border-primary" />
+                            </div>
+                            <div class="mb-4">
+                                <input type="submit" value="Client Sign In" class="w-full rounded-md border bordder-primary py-3 px-5 bg-primary text-base text-black font-bold cursor-pointer hover:bg-opacity-90 transition" />
+                            </div>
+                            <p class="text-base text-[#adadad]">Don't have an account? <a href="#" class="text-primary underline">Create one below</a>.</p>
+                        </form>
+                        <button class="bg-blue-500 text-white px-4 py-2 rounded-md mt-4" onclick="window.location.href='registrationform.html'">Client Registration</button>
+                    </div>
+                </div>
+            </div>       </div>
+    </section>
+    <!-- ====== Forms Section End -->
+
+    <script>
+        document.getElementById('vendorLoginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var vendorEmail = document.getElementById('vendorEmail').value;
+            var vendorPassword = document.getElementById('vendorPassword').value;
+            // Add your validation logic here
+            if (vendorEmail === 'winhack@gmail.com' && vendorPassword === 'hackathon') {
+                window.location.href = 'vendorprofile.html';
+            } else {
+                alert('Invalid credentials. Please try again.');
+            }
+        });
+
+        document.getElementById('clientLoginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var clientEmail = document.getElementById('clientEmail').value;
+            var clientPassword = document.getElementById('clientPassword').value;
+            // Add your validation logic here
+            // For demonstration purpose, assuming client login always successful
+            window.location.href = 'clientpf.html';
+        });
+    </script>
+</body>
+</html>
